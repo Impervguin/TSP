@@ -54,6 +54,6 @@ class Graph:
         x = [coord[0] for coord in points]
         y = [coord[1] for coord in points]
         fig = plotly.graph_objs.Figure()
-        fig.add_trace(plotly.graph_objs.Scatter(x=x, y=y, mode="lines+markers", text=path))
+        fig.add_trace(plotly.graph_objs.Scatter(x=x, y=y, mode="lines+markers+text", text=path,textposition="bottom right"))
         fig.show()
 
