@@ -21,14 +21,14 @@ class FullSearchAlgorithm(Algorithm):
         return [start_point] + [*min_path[1]], min_path[0], total_time
 
 
+if __name__ == "__main__":
+    points = [(10, 10), (9, 1), (3, 5), (5, 5), (9, 9), (1, 1), (5, 9), (8, 15), (9, 5)]
+    graph = Graph(*points)
+    algorithm = FullSearchAlgorithm(graph)
+    start = 1 # 9, 1
+    path, dist, tot_time = algorithm.solve(start)
 
-points = [(10, 10), (9, 1), (3, 5), (5, 5), (9, 9), (1, 1), (5, 9), (8, 15), (9, 5)]
-graph = Graph(*points)
-algorithm = FullSearchAlgorithm(graph)
-start = 1 # 9, 1
-path, dist, tot_time = algorithm.solve(start)
-
-print(" -> ".join([str(i) for i in path]))
-print(dist)
-print(tot_time)
-graph.visualize_path_plotly(path)
+    print(" -> ".join([str(i) for i in path]))
+    print(dist)
+    print(tot_time)
+    graph.visualize_path_plotly(path)

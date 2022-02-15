@@ -6,17 +6,17 @@ import plotly.express
 
 class Graph:
     def __init__(self, *args):
-        self.points = list()
+        self.points = dict()
         self.number_of_points = len(args)
         for i in range(len(args)):
-            self.points.append(args[i])
+            self.points[i] = args[i]
 
     def get_point_coordinates(self, point_name):
         return self.points[point_name]
 
 
     def add_point(self, point):
-        self.points.append(point)
+        self.points[self.number_of_points] = point
         self.number_of_points += 1
 
     def get_n_points(self):
@@ -36,17 +36,6 @@ class Graph:
         d = sqrt((pc1[0] - pc2[0]) ** 2 + (pc1[1] - pc2[1]) ** 2)
         return d
 
-    def generate_random_path(self, start_point):
-        points = self.points.copy()
-        points.remove(start_point)
-        path = [start_point]
-        total_dist = 0
-        for _ in range(self.number_of_points - 1):
-            point = choice(points)
-            total_dist += self.calculate_distance(path[-1], point)
-            points.remove(point)
-            path.append(point)
-        return path, total_dist
 
 
     def visualize_path_plotly(self, path):
