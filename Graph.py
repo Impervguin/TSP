@@ -33,7 +33,7 @@ class Graph:
     def calculate_distance(self, point1, point2):
         pc1 = self.points[point1]
         pc2 = self.points[point2]
-        d = sqrt((pc1[0] - pc2[0]) ** 2 + (pc1[1] - pc2[1]) ** 2)
+        d = sqrt((pc1[0] - pc2[0]) ** 2 + (pc1[1] - pc2[1]) ** 2 + (pc1[2] - pc2[2]) ** 2)
         return d
 
 
@@ -42,7 +42,9 @@ class Graph:
         points = [self.get_point_coordinates(i) for i in path]
         x = [coord[0] for coord in points]
         y = [coord[1] for coord in points]
-        fig = plotly.graph_objs.Figure()
-        fig.add_trace(plotly.graph_objs.Scatter(x=x, y=y, mode="lines+markers+text", text=path,textposition="bottom right"))
+        z = [coord[2] for coord in points]
+        fig = plotly.express.line_3d(x=x, y=y,z=z, markers=True, text=path)
+        # fig = plotly.graph_objs.Figure()
+        # fig.add_trace(plotly.graph_objs.Scatter(x=x, y=y,z=z, mode="lines+markers+text", text=path,textposition="bottom right"))
         fig.show()
 
