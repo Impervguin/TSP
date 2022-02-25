@@ -5,24 +5,24 @@ import time
 class FullSearchAlgorithm(Algorithm):
     def solve(self, start_point):
         points = self.graph.get_points()
-        paths = permutations([i for i in range(self.graph.get_n_points()) if i != start_point])
+        paths = [[start_point] + list(p) + [start_point] for p in permutations([i for i in range(self.graph.get_n_points()) if i != start_point])]
         min_path = (-1, -1)
         start_time = time.time()
         for path in paths:
-            dist = self.graph.calculate_distance(start_point, path[0])
-            for i in range(1, len(path)):
-                dist += self.graph.calculate_distance(path[i - 1], path[i])
+            dist = 0
+            for i in range(len(path) - 1):
+                dist += self.graph.calculate_distance(path[i], path[i + 1])
             if min_path[0] == -1:
                 min_path = (dist, path)
             elif min_path[0] > dist:
                 min_path = (dist, path)
         end_time = time.time()
         total_time = end_time - start_time
-        return [start_point] + [*min_path[1]], min_path[0], total_time
+        return min_path[1], min_path[0], total_time
 
 
 if __name__ == "__main__":
-    points = [(10, 10), (9, 1), (3, 5), (5, 5), (9, 9), (1, 1), (5, 9), (8, 15), (9, 5)]
+    points = [(10, 10, 10), (9, 1, 10), (3, 5, 10), (5, 5, 10), (9, 9, 2), (1, 1, 5), (5, 9, 6), (8, 15, 8), (9, 5, 2)]
     graph = Graph(*points)
     algorithm = FullSearchAlgorithm(graph)
     start = 1 # 9, 1
