@@ -42,7 +42,7 @@ class Individual:
 
 
 class Generation:
-    def __init__(self, start_point, graph, population):
+    def __init__(self, start_point,graph, population):
         self.start_point = start_point
         self.graph = graph
         self.population = population
@@ -62,7 +62,7 @@ class Generation:
     def get_next_generation(self):
         new_population = [self.get_child() for _ in range(len(self.population))]
 
-        return Generation(self.start_point, self.graph, new_population)
+        return Generation(self.start_point,self.graph, new_population)
 
     def get_best_ind(self):
         return min(self.population, key=lambda x: x.fitness)
@@ -75,7 +75,7 @@ class GeneticAlgoritm(Algorithm):
         self.generations = generations
         self.mutation = mutation
 
-    def solve(self, start_point):
+    def solve(self, start_point=0):
         best_inds = []
         population = []
         start_time = time.time()
@@ -83,7 +83,7 @@ class GeneticAlgoritm(Algorithm):
             perm = [i for i in range(self.graph.get_n_points()) if i != start_point]
             shuffle(perm)
             population.append(Individual(start_point, self.graph, perm, self.mutation))
-        generation = Generation(start_point, self.graph, population)
+        generation = Generation(start_point,self.graph, population)
         best_ind = generation.get_best_ind()
         best_inds.append(best_ind.fitness)
         for _ in range(self.generations - 1):

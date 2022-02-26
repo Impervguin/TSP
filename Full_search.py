@@ -3,7 +3,7 @@ from Algorithm import Algorithm
 from itertools import permutations
 import time
 class FullSearchAlgorithm(Algorithm):
-    def solve(self, start_point):
+    def solve(self, start_point=0):
         points = self.graph.get_points()
         paths = [[start_point] + list(p) + [start_point] for p in permutations([i for i in range(self.graph.get_n_points()) if i != start_point])]
         min_path = (-1, -1)

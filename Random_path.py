@@ -4,7 +4,7 @@ from random import choice
 import time
 
 class RandomAlgorithm(Algorithm):
-    def solve(self, start_point):
+    def solve(self, start_point=0):
         graph_points = self.graph.get_points()
         points = [(i, graph_points[i])for i in range(len(graph_points))]
         del points[start_point]
@@ -16,6 +16,8 @@ class RandomAlgorithm(Algorithm):
             total_dist += self.graph.calculate_distance(path[-1], point[0])
             points.remove(point)
             path.append(point[0])
+        path.append(start_point)
+        total_dist += self.graph.calculate_distance(path[-2], path[-1])
         end_time = time.time()
         total_time = end_time - start_time
         return path, total_dist, total_time
